@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>sen is cool</title>
+    </head>
+    <p id="lil"></p>
+    <body class="center">
+        <div id="box">
+            <div id="jse" style="padding:10px; font-weight: bolder; color: #CF0;">
+                <p>NoScript strikes again owo</p>
+                <p>((or an old browser / disabled js))</p>
+            </div>
+            <div>
+                <input id="guildInput">
+            </div>
+        </div>
+        <button id="check">Click to Check</button>
+        <script>
+            const ur_a = { red: "#fb6962", yellow: "#fcfc99", green: "#79de79", cyan: "#cbf6f8" }
+            const lil = ["great job!", "hello!", "hey", "welcome back!", "hai owo", "hai, welcome back!", "can i haz numbers", "can i haz numbers pls", "Please enter your credit card number:", "how many chicken nuggies can I have?", "BEEP BOOP", "BEEP BOOP GIMME NUMBERS", "hey can i get ur nmber OwO", "zu was here, and very bored lol", "how many bidtchs does compositr get", "you gots a rare response, zu says hi", "keep going!", "you're doing an awesome job!", "you're doing a great job!", "you're doing awesome, big awesome.", "imagine being a jobless skid LOL", "scammers get no bidtchs"];
+            const b = document.getElementById("box");
+            const i = document.getElementById("guildInput");
+            const t = document.getElementById("check");
+            const c = document.getElementById("jse");
+            const h = document.getElementById("lil");
+
+            h.innerText = lil[Math.floor(Math.random()*lil.length)]
+
+            const handle = (x) => {
+                b.style.borderBottom = "10px "+ (x ? ur_a.green : ur_a.red) + " solid"
+                t.style.opacity = x ? 1 : 0;
+            }
+
+            const handleB = (t, v) => {
+                if(t === 1){
+                    document.body.style.background = ur_a.green
+                    setTimeout(()=>{ alert(v + " exists!"); }, 1000);
+                } else if(t === 2){
+                    document.body.style.background = ur_a.red
+                    setTimeout(()=>{ alert(v + " does not exist!"); }, 1000);
+                } else if(t === 3){
+                    document.body.style.background = ur_a.cyan
+                    setTimeout(()=>{ alert(v + " exists and has widget enabled!"); }, 1000);
+                } else {
+                    document.body.style.background = ur_a.yellow
+                    setTimeout(()=>{ alert(t); }, 1000);
+                }
+                setTimeout(()=>{
+                    document.body.style.background = "#222"
+                }, 1500)
+
+            }
+
+            t.onclick = async () => {
+                if(i.value){
+                    let r = await fetch(`https://discord.com/api/v10/guilds/${i.value}/widget.json`);
+                    let y = await r.json();
+                    console.log(y);
+                    if(typeof y.code !== "undefined"){
+                        if (y.code === 50004) return handleB(1, i.value);
+                        if (y.code === 10004) return handleB(2, i.value);
+                        if (y.code === 50035) return handleB("Invalid ID!");
+                        if (y.code === 0) return handleB("You're being ratelimited!!");
+                    } else if(typeof y.id !== "undefined") return handleB(3, i.value);
+                    return handleB(`Something went wrong? Error code: ${y.code} Res: ${y}`);
+                }
+            }
+
+            i.value = "";
+            i.style.opacity = 1;
+            c.remove();
+            handle(false);
+
+            i.addEventListener("input", n => {
+                let V = n.target.value;
+                if(!V) return handle(false);
+                let matches = V.match(/\d{18,19}/g);
+                if(!matches) return handle(false);
+                if(matches.length == 1){
+                    console.log(matches[0]);
+                    return handle(true);
+                } else return handle(false);
+            });
+
+        </script>
+    </body>
+</html>
