@@ -50,3 +50,8 @@ button {
     background: rgba(30, 30, 30, 0.8);
     border-radius: 0px 0px 10px 10px;
 }
+
+.clickable {
+    user-select: none;
+    cursor: pointer;
+}
