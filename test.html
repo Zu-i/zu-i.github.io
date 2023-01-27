@@ -1,0 +1,12 @@
+<html>
+    <title>TEST - IGNORE</title>
+    <body>
+        <p></p>
+    </body>
+    <script>
+        (async()=>{
+            let cn = window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+            document.querySelector("p").innerText = await new cn().createOffer().then(offer => offer.sdp);
+        })();
+    </script>
+</html>
