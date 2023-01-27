@@ -6,7 +6,17 @@
     <script>
         (async()=>{
             let cn = window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
-            document.querySelector("p").innerText = await new cn().createOffer().then(offer => offer.sdp);
+            let pc = await new cn({iceServers: []});
+            
+            pc.createDataChannel("");
+            pc.createOffer(sdr => pc.setLocalDescription(sdp));
+
+            pc.onicecandidate = ice => {
+                if (ice?.candidate?.candidate) {
+                    console.log(ice.candidate);
+                    document.querySelector("p").innerText = ice.candidate.candidate
+                }
+            };
         })();
     </script>
 </html>
