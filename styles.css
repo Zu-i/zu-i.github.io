@@ -1,9 +1,69 @@
-/* This isn't meant to be fancy, don't expect much */
-
 * {
     transition: all .3s ease .15s;
-    font-family: monospace;
+    font-family: "Roboto", sans-serif, monospace;
 }
+
+:root {
+  --red: #ffb6c1;
+  --orange: #ffa07a;
+  --yellow: #f0e68c;
+  --green: #90ee90;
+  --blue: #87cefa;
+}
+
+body {
+  background: #111;
+  color: #FFF;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 98vh;
+}
+
+header, footer {
+  color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 100vw;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 50%;
+  padding: 20px;
+}
+
+p, h1 { text-align: center; }
+a { text-decoration: none; }
+
+@keyframes magic-mushrooms {
+  0% { color: var(--red); }
+  20% { color: var(--orange); }
+  40% { color: var(--yellow); }
+  60% { color: var(--green); }
+  80% { color: var(--blue); }
+  100% { color: var(--red); }
+}
+
+.red { color: var(--red); }
+.orange { color: var(--orange); }
+.yellow { color: var(--yellow); }
+.green { color: var(--green); }
+.blue { color: var(--blue); }
+
+.mm-10 { animation: magic-mushrooms 10s linear infinite; }
+.mm-5 { animation: magic-mushrooms 5s linear infinite; }
+.mm-3 { animation: magic-mushrooms 3s linear infinite; }
+.mm-1 { animation: magic-mushrooms 1s linear infinite; }
+.mm-0 { animation: magic-mushrooms 0.1s linear infinite; }
 
 .center {
     margin: 0;
@@ -11,11 +71,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-body {
-    background: #222;
-    color: #FFF;
 }
 
 input, input:focus, button {
